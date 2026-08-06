@@ -1,7 +1,14 @@
 import { type FC } from 'react';
+import Home from './pages/Home';
+import Watch from './pages/Watch';
 
 const App: FC = () => {
-  return <div className='bg-red-500 border-2 border-black text-4xl'>App</div>;
+  return (
+    <div>
+      {/* <Home/> */}
+      <Watch />
+    </div>
+  );
 };
 
 export default App;
