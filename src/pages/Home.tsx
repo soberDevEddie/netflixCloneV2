@@ -6,8 +6,8 @@ import { tmdbAPI } from '../tmdbApi';
 const Home: FC = () => {
   useEffect(() => {
     const getMovie = async () => {
-      const response = await tmdbAPI.fetchPopularMovies();
-      console.log(response);
+      const res = await tmdbAPI.fetchPopularMovies();
+      console.log(res.data);
     };
     getMovie();
   }, []);

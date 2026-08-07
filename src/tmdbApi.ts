@@ -1,7 +1,7 @@
 import axios, { type AxiosRequestConfig } from 'axios';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 export interface RequestError extends Error {
   status?: number;
@@ -46,5 +46,16 @@ const get = async <T>(
 
 export const tmdbAPI = {
   fetchPopularMovies: (page: number = 1) =>
-    get<any>(`/movie/popular`, { params: { page } }),
+    get<{ results: Movie[] }>(`/movie/popular`, { params: { page } }),
+  fetchTrendingMovies: (timeWindow: string = 'week') =>
+    get<{ results: Movie[] }>(`/trending/movie/${timeWindow}`),
+  fetchTopRatedMovies: (page: number) =>
+    get<{ results: Movie[] }>(`/movie/top_rated`, { params: { page } }),
+  getGenres: () => {
+    get<{ genres: Genre[] }>(`/genre/movie/list`);
+  },
+  getMoviesByGenre: (genreId: number, page: number = 1) =>
+    get<{ genres: Genre[] }>(`discover/movie`, {
+      params: { with_genres: genreId, page },
+    }),
 };
