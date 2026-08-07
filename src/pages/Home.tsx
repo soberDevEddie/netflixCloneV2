@@ -5,12 +5,25 @@ import { tmdbAPI } from '../tmdbApi';
 
 const Home: FC = () => {
   useEffect(() => {
-    const getMovie = async () => {
-      const res = await tmdbAPI.fetchPopularMovies();
-      console.log(res.data);
+    const loadMovies = async () => {
+      const [
+        popularMoviesResult,
+        topRatedMoviesResult,
+        trendingMoviesResult,
+        allGenres,
+      ] = await Promise.all([
+        tmdbAPI.fetchPopularMovies(),
+        tmdbAPI.fetchTopRatedMovies(1),
+        tmdbAPI.fetchTrendingMovies('week'),
+        tmdbAPI.getGenres(),
+      ]);
+      console.log(popularMoviesResult, 'Popular Movies');
+      console.log(allGenres, 'All Genres');
     };
-    getMovie();
+
+    loadMovies();
   }, []);
+
   return <div>Home</div>;
 };
 

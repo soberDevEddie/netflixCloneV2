@@ -55,7 +55,7 @@ export const tmdbAPI = {
     get<{ genres: Genre[] }>(`/genre/movie/list`);
   },
   getMoviesByGenre: (genreId: number, page: number = 1) =>
-    get<{ genres: Genre[] }>(`discover/movie`, {
+    get<{ genres: Movie[] }>(`discover/movie`, {
       params: { with_genres: genreId, page },
     }),
 };
